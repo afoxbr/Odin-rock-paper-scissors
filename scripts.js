@@ -10,13 +10,13 @@ function computerPlay() {
     const computerResponse = getRandomInt(1,3);
 
     if (computerResponse == 1) {
-            text = ("Rock")
+            text = ("Rock");
     }
     if (computerResponse == 2) {
-            text = ("Paper")
+            text = ("Paper");
     }
     if (computerResponse == 3) {
-            text = ("Scissors")
+            text = ("Scissors");
     }
     return(text);
 }
@@ -69,9 +69,7 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
-    
     for (let i = 0; i < 5; i++) {
-        playRound();
         console.log(playRound());
     }
     console.log("Player wins: " + playerWins);
