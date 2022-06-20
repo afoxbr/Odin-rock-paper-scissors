@@ -2,6 +2,9 @@
 let playerWins = 0;
 let compWins = 0;
 let ties = 0;
+
+const results = document.querySelector('#results');
+
 function playRound(){
     if (playerSelection == "Rock") {
         let computerSelection = computerPlay();
@@ -11,18 +14,30 @@ function playRound(){
         }
         else if (computerSelection == "Paper") {
             compWins++;
-            return("You lose! Paper beats rock!\nPlayer wins: " + playerWins + "\nComputer wins: " + compWins + "\nTies: " + ties);
+            if (compWins ==5){
+                return("Paper beast rock! Computer has won five times!!!")
+            } else {
+                return("You lose! Paper beats rock!\nPlayer wins: " + playerWins + "\nComputer wins: " + compWins + "\nTies: " + ties);
+            };
         }
         else if (computerSelection == "Scissors") {
             playerWins++;
-            return("You win! Rock beats scissors!\nPlayer wins: " + playerWins + "\nComputer wins: " + compWins + "\nTies: " + ties);
+            if (playerWins == 5){
+                return("Rock beats scissors! You've won five times!!!")
+            } else {
+                return("You win! Rock beats scissors!\nPlayer wins: " + playerWins + "\nComputer wins: " + compWins + "\nTies: " + ties);
+            };
         }
     }
     if (playerSelection == "Paper") {
         let computerSelection = computerPlay();
         if (computerSelection == "Rock") {
             playerWins++;
+            if (playerWins ==5){
+                return("Paper beats rock! You've won five times!!!")
+            } else {
             return("You win! Paper beats rock!\nPlayer wins: " + playerWins + "\nComputer wins: " + compWins + "\nTies: " + ties);
+            };
         }
         else if (computerSelection == "Paper") {
             ties++;
@@ -30,23 +45,41 @@ function playRound(){
         }
         else if (computerSelection == "Scissors") {
             compWins++;
+            if (compWins == 5){
+                return("Scissors beats paper! You've lost five times!!!")
+            } else {
             return("You lose! Scissors beats paper!\nPlayer wins: " + playerWins + "\nComputer wins: " + compWins + "\nTies: " + ties);
+            };
         }
     }
     if (playerSelection == "Scissors") {
         let computerSelection = computerPlay();
         if (computerSelection == "Rock") {
             compWins++;
+            if (compWins == 5){
+                return("Rock beats scissors! You've lost five times!!!")
+            } else {
             return("You lose! Rock beats scissors!\nPlayer wins: " + playerWins + "\nComputer wins: " + compWins + "\nTies: " + ties);
+            };
         }
         else if (computerSelection == "Paper") {
             playerWins++;
+            if (playerWins == 5) {
+                return("Scissors beats paper! You've won five times!!!")
+            } else {
             return("You win! Scissors beats paper!\nPlayer wins: " + playerWins + "\nComputer wins: " + compWins + "\nTies: " + ties);
+            };
         }
         else if (computerSelection == "Scissors") {
             ties++;
             return("A tie!\nPlayer wins: " + playerWins + "\nComputer wins: " + compWins + "\nTies: " + ties);
         }
+    }
+    if (playerWins >= 5){
+        let victory = document.createElement('div');
+        victory.classList.add('victory');
+        victory.textContent = "Game over! You won!";
+        results.appendChild(victory);
     }
 }
 function computerPlay() {
@@ -67,7 +100,6 @@ function computerPlay() {
     }
     return(text);
 }
-const results = document.querySelector('#results');
 
 const rock = document.querySelector('#rock');
 rock.addEventListener("click", () => {
@@ -84,3 +116,7 @@ scissors.addEventListener("click", () => {
     results.textContent = (playRound(playerSelection = "Scissors"));
     });
 
+const reset = document.querySelector('#reset');
+reset.addEventListener("click", () => {
+    window.location.reload();
+});
